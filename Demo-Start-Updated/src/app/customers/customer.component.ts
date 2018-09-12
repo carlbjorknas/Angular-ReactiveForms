@@ -17,7 +17,7 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     this.customerForm = this.fb.group({
       firstName:'',
-      lastName:{value:'n/a', disabled:true},
+      lastName:'',
       email:'',
       sendCatalog:true
     })
