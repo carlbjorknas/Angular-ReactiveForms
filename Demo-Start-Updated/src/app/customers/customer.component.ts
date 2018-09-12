@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Customer } from './customer';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+
+function ratingRange(c: AbstractControl): {[key: string]: boolean} | null {
+  if (c.value != undefined && (isNaN(c.value) || c.value < 1 || c.value > 5)){
+    return {'range': true}
+  }
+  return null
+}
 
 @Component({
   selector: 'app-customer',
@@ -22,7 +29,8 @@ export class CustomerComponent implements OnInit {
       // Exempel med regex: Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')
       phone:'',
       notification:'email',
-      sendCatalog:true
+      sendCatalog:true,
+      rating: ['', ratingRange]
     })
   }
 
