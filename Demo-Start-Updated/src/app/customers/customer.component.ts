@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Customer } from './customer';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-customer',
@@ -16,9 +16,10 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit() {
     this.customerForm = this.fb.group({
-      firstName:'',
-      lastName:'',
-      email:'',
+      firstName:['', [Validators.required, Validators.minLength(3)]],
+      lastName:['',[Validators.required, Validators.maxLength(50)]],
+      email:['',[Validators.required, Validators.email]], 
+      // Exempel med regex: Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')
       sendCatalog:true
     })
   }
